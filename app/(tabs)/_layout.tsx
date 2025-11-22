@@ -1,33 +1,49 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+import { Tabs } from "expo-router";
+import { FontAwesome } from '@expo/vector-icons';
+import Feather from '@expo/vector-icons/Feather';
+export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarActiveTintColor: 'coral',
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="Home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="home" size={size} color={color} />
+          ),
+        }}
+      />
+
+      {/* <Tabs.Screen
+        name="Login"
+        options={{
+          title: "Login",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="sign-in" size={size} color={color} />
+          ),
+        }}
+      /> */}
+
+      <Tabs.Screen
+        name="Transactions"
+        options={{
+          title: "Transactions",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="list-alt" size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="Account"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Account",
+          tabBarIcon: ({ color, size }) => (
+           <Feather name="user" size={24} color="black" />
+          ),
         }}
       />
     </Tabs>
