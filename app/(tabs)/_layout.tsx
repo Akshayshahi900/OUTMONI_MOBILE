@@ -1,51 +1,23 @@
-import { Tabs } from "expo-router";
-import { FontAwesome } from '@expo/vector-icons';
-import Feather from '@expo/vector-icons/Feather';
+import { useAuth } from "@/hooks/useAuth";
+import { Redirect, Tabs } from "expo-router";
+
 export default function TabsLayout() {
+  const { authenticated } = useAuth();
+
+  if (!authenticated) return <Redirect href="/(auth)/login" />;
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: 'coral',
+        headerShown: false,
+        tabBarActiveTintColor: "coral",
+        tabBarLabelStyle: { fontSize: 12 },
       }}
     >
-      <Tabs.Screen
-        name="Home"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="home" size={size} color={color} />
-          ),
-        }}
-      />
-
-      {/* <Tabs.Screen
-        name="Login"
-        options={{
-          title: "Login",
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="sign-in" size={size} color={color} />
-          ),
-        }}
-      /> */}
-
-      <Tabs.Screen
-        name="Transactions"
-        options={{
-          title: "Transactions",
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="list-alt" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="Account"
-        options={{
-          title: "Account",
-          tabBarIcon: ({ color, size }) => (
-           <Feather name="user" size={24} color="black" />
-          ),
-        }}
-      />
+      <Tabs.Screen name="home" options={{ title: "Home" }} />
+      <Tabs.Screen name="transactions" options={{ title: "Transactions" }} />
+      <Tabs.Screen name="account" options={{ title: "Account" }} />
+      <Tabs.Screen name="settings" options={{ title: "Settings" }} />
     </Tabs>
   );
 }
